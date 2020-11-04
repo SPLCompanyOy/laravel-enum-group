@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Skeleton\Tests;
+namespace Splcompanyoy\LaravelEnumGroup\Tests;
 
 use PHPUnit\Framework\TestCase;
 

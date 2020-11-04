@@ -1,17 +1,19 @@
 {
-    "name": ":vendor_name/:package_name",
-    "description": ":package_description",
+    "name": "splcompanyoy/laravel-enum-group",
+    "description": "",
     "keywords": [
-        ":vendor_name",
-        ":package_name"
+        "splcompanyoy",
+        "laravel-enum-group",
+        "laravel",
+        "enum"
     ],
-    "homepage": "https://github.com/:vendor_name/:package_name",
+    "homepage": "https://github.com/SPLCompanyOy/laravel-enum-group",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
-            "homepage": "https://spatie.be",
+            "name": "Matias Mäki",
+            "email": "matias.maki@ukko.fi",
+            "homepage": "https://www.ukko.fi",
             "role": "Developer"
         }
     ],
@@ -25,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Skeleton\\": "src"
+            "Splcompanyoy\\LaravelEnumGroup\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\Skeleton\\Tests\\": "tests"
+            "Splcompanyoy\\LaravelEnumGroup\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -43,15 +45,5 @@
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "funding": [
-        {
-            "type": "github",
-            "url": "https://github.com/sponsors/spatie"
-        },
-        {
-            "type": "other",
-            "url": "https://spatie.be/open-source/support-us"
-        }
-    ]
+    "prefer-stable": true
 }
