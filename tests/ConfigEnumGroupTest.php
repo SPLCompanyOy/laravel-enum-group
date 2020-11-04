@@ -2,9 +2,8 @@
 
 namespace SplCompanyOy\LaravelEnumGroup\Tests;
 
-use SplCompanyOy\LaravelEnumGroup\EnumGroup;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use SplCompanyOy\LaravelEnumGroup\EnumGroup;
 use SplCompanyOy\LaravelEnumGroup\EnumGroupInterface;
 
 // @TODO: test enum group with some enums
