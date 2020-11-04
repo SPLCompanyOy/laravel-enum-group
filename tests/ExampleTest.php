@@ -1,8 +1,6 @@
 <?php
 
-namespace Splcompanyoy\LaravelEnumGroup\Tests;
-
-use PHPUnit\Framework\TestCase;
+namespace SplCompanyOy\LaravelEnumGroup\Tests;
 
 class ExampleTest extends TestCase
 {

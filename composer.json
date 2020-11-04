@@ -3,6 +3,9 @@
     "description": "",
     "keywords": [
         "splcompanyoy",
+        "ukkofi",
+        "ukkopro",
+        "ukko",
         "laravel-enum-group",
         "laravel",
         "enum"
@@ -19,31 +22,44 @@
     ],
     "require": {
         "php": "^7.4",
+        "illuminate/contracts": "^8.0|^6.0",
         "bensampo/laravel-enum": "~1.3"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
+        "orchestra/testbench": "^6.0|^4.0",
         "phpunit/phpunit": "^9.3",
         "vimeo/psalm": "^3.11"
     },
     "autoload": {
         "psr-4": {
-            "Splcompanyoy\\LaravelEnumGroup\\": "src"
+            "SplCompanyOy\\LaravelEnumGroup\\": "src",
+            "SplCompanyOy\\LaravelEnumGroup\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Splcompanyoy\\LaravelEnumGroup\\Tests\\": "tests"
+            "SplCompanyOy\\LaravelEnumGroup\\Tests\\": "tests"
         }
     },
     "scripts": {
         "psalm": "vendor/bin/psalm",
-        "test": "vendor/bin/phpunit",
+        "test": "vendor/bin/phpunit --colors=always",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
         "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
     },
     "config": {
         "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SplCompanyOy\\LaravelEnumGroup\\EnumGroupServiceProvider"
+            ],
+            "aliases": {
+                "Skeleton": "SplCompanyOy\\LaravelEnumGroup\\EnumGroupFacade"
+            }
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
