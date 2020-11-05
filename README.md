@@ -17,7 +17,7 @@ Add composer.json:
 ```
     require: {
         ...
-        "laravel-enum-group": "^1.0",
+        "laravel-enum-group": "dev-master",
     }
 
     "repositories": [
@@ -28,6 +28,10 @@ Add composer.json:
     ],
 ```
 
+Install it with the command:
+```
+COMPOSER_MEMORY_LIMIT=-1 composer require splcompanyoy/laravel-enum-group
+``` 
 
 
 ### TODO: Future Packagist Registration 
