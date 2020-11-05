@@ -36,6 +36,10 @@ class EnumGroupServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/enum_group.php', 'enum_group');
+
+        $this->app->singleton('enumgroup', function($app) {
+            return new EnumGroupFactory();
+        });
     }
 
 //    public static function migrationFileExists(string $migrationFileName): bool

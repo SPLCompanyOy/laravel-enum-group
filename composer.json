@@ -57,7 +57,7 @@
                 "SplCompanyOy\\LaravelEnumGroup\\EnumGroupServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "SplCompanyOy\\LaravelEnumGroup\\EnumGroupFacade"
+                "EnumGroup": "SplCompanyOy\\LaravelEnumGroup\\EnumGroupFacade"
             }
         }
     },

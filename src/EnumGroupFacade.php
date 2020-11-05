@@ -5,7 +5,7 @@ namespace SplCompanyOy\LaravelEnumGroup;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Spatie\Skeleton\Skeleton
+ * @see SplCompanyOy\LaravelEnumGroup\EnumGroupFactory
  */
 class EnumGroupFacade extends Facade
 {
