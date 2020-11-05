@@ -9,5 +9,5 @@ return [
             FictionalStatusEnum::CREATED(),
             FictionalStatusEnum::REJECTED(),
         ],
-    ]
+    ],
 ];
