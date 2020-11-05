@@ -37,7 +37,7 @@ class EnumGroupServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/enum_group.php', 'enum_group');
 
-        $this->app->singleton('enumgroup', function($app) {
+        $this->app->singleton('enumgroup', function ($app) {
             return new EnumGroupFactory();
         });
     }
