@@ -2,13 +2,13 @@
 
 namespace SplCompanyOy\LaravelEnumGroup;
 
-use Illuminate\Support\Facades\Config;
 use InvalidArgumentException;
+use Illuminate\Support\Facades\Config;
 
 /**
  * Factory Facade for changing the loading logic easily
  * Ie. currently we have groups defined inside config but we could also have
- * them saved within database etc
+ * them saved within database etc.
  */
 class EnumGroupFactory
 {
