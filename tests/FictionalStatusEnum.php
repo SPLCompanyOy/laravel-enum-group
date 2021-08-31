@@ -13,7 +13,10 @@ use BenSampo\Enum\Enum;
 class FictionalStatusEnum extends Enum
 {
     public const CREATED = 'created';
+
     public const REJECTED = 'rejected';
+
     public const IN_REVIEW = 'in_review';
+
     public const SENT = 'sent';
 }

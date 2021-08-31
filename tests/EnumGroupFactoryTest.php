@@ -2,7 +2,7 @@
 
 namespace SplCompanyOy\LaravelEnumGroup\Tests;
 
-use \InvalidArgumentException;
+use InvalidArgumentException;
 use Illuminate\Support\Facades\Config;
 use SplCompanyOy\LaravelEnumGroup\EnumGroup;
 use SplCompanyOy\LaravelEnumGroup\EnumGroupFactory;
