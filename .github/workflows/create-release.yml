@@ -1,0 +1,67 @@
+name: Create Release
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  createPackage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create composer archive
+        uses: php-actions/composer@v6
+        with:
+           command: "archive --format=zip --file=composer-archive"
+
+      - name: Upload to Cloudsmith
+        id: "push"
+        uses: cloudsmith-io/action@master
+        with:
+          api-key: ${{ secrets.CLOUDSMITH_API_KEY }}
+          command: "push"
+          format: "composer"
+          owner: "spl-company-oy"
+          repo: "php-packages"
+          file: "composer-archive.zip"
+          version: ${{ github.sha }}
+
+      - name: Get version from composer.json
+        uses: sergeysova/jq-action@v2
+        id: version
+        with:
+          cmd: 'jq .version composer.json -r'
+
+      - name: Reset develop branch on runner
+        run: |
+          git fetch origin develop:develop
+          git reset --hard develop
+
+      - name: Build Changelog since the latest tag
+        id: build_changelog
+        run: |
+          PREVIOUS_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+          GIT_LOG=$(git log  --pretty=format:"## %s%n%n%b%n%n" --merges "${PREVIOUS_TAG}..HEAD")
+          GIT_LOG="${GIT_LOG//'%'/'%25'}"
+          GIT_LOG="${GIT_LOG//$'\n'/'%0A'}"
+          GIT_LOG="${GIT_LOG//$'\r'/'%0D'}"
+          echo "::set-output name=changelog::$GIT_LOG"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ steps.version.outputs.value }}
+          tag_name: ${{ steps.version.outputs.value }}
+          # body_path: RELEASE_NOTES.md
+          body: |
+            ${{ steps.build_changelog.outputs.changelog }}
+          target_commitish: ${{ github.sha }}
+          # token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}

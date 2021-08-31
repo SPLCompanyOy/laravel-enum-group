@@ -1,0 +1,60 @@
+name: Create Dev to Master PR
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  generatePR:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Reset develop branch on runner
+        run: |
+          git fetch origin develop:develop
+          git reset --hard develop
+
+      - name: Build Changelog since the latest tag
+        id: build_changelog
+        run: |
+          GIT_LOG=$(git log  --pretty=format:"## %s%n%n%b%n%n" --merges $(git describe --tags $(git rev-list --tags --max-count=1))..HEAD)
+          GIT_LOG="${GIT_LOG//'%'/'%25'}"
+          GIT_LOG="${GIT_LOG//$'\n'/'%0A'}"
+          GIT_LOG="${GIT_LOG//$'\r'/'%0D'}"
+          echo "::set-output name=changelog::$GIT_LOG"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        # - name: Add updated RELEASE_NOTES.md to the branch
+        #  run: |
+        #    git config user.email "trm42@users.noreply.github.com"
+        #    git config user.name "Matias Mäki"
+        #    git add RELEASE_NOTES.md
+        #    git commit -m "Update RELEASE_NOTES.md"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        id: cpr
+        with:
+          base: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+          delete-branch: true
+          branch: "dev-to-master"
+          # commit-message: "Update RELEASE_NOTES.md"
+          title: "Automated Dev -> Master PR"
+          body: |
+            ${{ steps.build_changelog.outputs.changelog }}
+
+      - name: Happy Path Info
+
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+          echo ""
+          echo "Release Notes:"
+          echo "${{ steps.build_changelog.outputs.changelog }}"
